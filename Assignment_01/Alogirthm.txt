@@ -1,0 +1,13 @@
+Write an X86/64 ALP to accept five 64 bit Hexadecimal numbers from the user and store them in an array and display the accepted numbers.
+
+
+ALGORITHM
+1. start
+2. Declare and define initialised variables in .data section
+3. Declare un-initialised variables in .bss section
+4. mov rbp (base ptr) to start of array
+5. read 64 bit hex number
+6. store it in array and increment rbp
+7. repat steps 3,4 five times
+8. display 64 bit hex numbers
+9. Stop
