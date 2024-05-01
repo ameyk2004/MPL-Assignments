@@ -17,9 +17,9 @@
 
 section .data
     msg1 db "Enter a number : ",10,13
-    msglen equ $-msg1
+    msglen1 equ $-msg1
     msg2 db "Entered Numbers are : ",10,13
-    msglen equ $-msg2
+    msglen2 equ $-msg2
 
     count db 05
  
@@ -35,7 +35,7 @@ global _start
        mov rbp, numarr
 
 loop1:
-    disp msg1, msglen
+    disp msg1, msglen1
     readnum rbp, 17
     add rbp,17
     dec byte[count]
