@@ -60,6 +60,7 @@ dec byte[count]
 jnz up
 
 
+disp msg2, msg2len
 disp resultarr, 16
 
 mov rax,60
