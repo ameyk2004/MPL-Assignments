@@ -49,7 +49,7 @@ global _start
     call htoa
 
     mov rax, 60
-    mov rdi,0
+    mov rdi, 0
     syscall
 
 htoa:
