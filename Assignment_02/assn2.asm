@@ -24,7 +24,7 @@ section .data
     count db 16
 
 section .bss
-    str1 resb 20
+    str1 resb 20 ; 
     resultarr resb 16
     
 
