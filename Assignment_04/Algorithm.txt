@@ -1,0 +1,11 @@
+1. start
+2. Define an array of 5 quadword
+3. Declare space to store largest num and counter
+4. set counter to 5
+5. set rax with 00h
+6. array element with contents of rax
+7. if value of ele reater, set rax with new ele
+8. continue step 6 and 7 for 5 times
+9. mov rax to variable named max
+10. display max
+11. end
