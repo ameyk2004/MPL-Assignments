@@ -1,104 +1,72 @@
-%macro disp 2
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, %1
-    mov rdx, %2
+%macro rw 4
+    mov rax, %1
+    mov rdi, %2
+    mov rsi, %3
+    mov rdx, %4
     syscall
 %endmacro
 
-%macro read 2
-    mov rax, 0
+
+%macro exit 0
+    mov rax, 60
     mov rdi, 0
-    mov rsi, %1
-    mov rdx, %2
     syscall
 %endmacro
+
 
 section .data
-
-    hellomsg db "Welcome to Calculator",10,13
-    hellomsglen equ $-hellomsg
-
-    menu db 10,13,10,13,"Menu",10,13
-         db "1. Addition",10,13
-         db "2. Subtraction",10,13
-         db "3. Multiplication",10,13
-         db "4. Division",10,13
-         db "5. Exit",10,13
-    menulen equ $-menu
-
-    addmsg db "Addition = "
-    addlen equ $-addlen
-
-    submsg db "Subtraction = "
-    sublen equ $-sublen
-
-    promsg db "Product = "
-    prolen equ $-prolen
-
-    quomsg db "Quotient = "
-    quolen equ $-quolen
-
-    remmsg db "Remainder = "
-    remlen equ $-remlen
-
-    num1 dq 0000000000000001h
-    num2 dq 0000000000000006h
-
+    num1 dq 01h
+    num2 dq 05h
+    
     result dq 0000000000000000h
-    quotient dq 0000000000000000h
-    remainder dq 0000000000000000h
-    count db 00h
+
+    hellomsg db " Welcome to Calculator ",10,13,10,13
+    hellolen equ $-hellomsg
+
+    resultmsg db "Result = "
+    reslen equ $-resultmsg
+
+    menu db 0xa,0xd,"----MENU----"
+        db 0xA,0xD,"1. Addition"
+        db 0xA,0xD,"2. Subraction"
+        db 0xA,0xD,"3. Multiplication"
+        db 0xA,0xD,"4. Division"
+        db 0xA,0xD,"5. Exit"
+        db 0xA,0xD
+        db 0xA,0xD,"Enter your choice:"
+
 
 section .bss
-    resultarr resb 16
-    opt resb 2
+    resultarr db 16
+    choice db 02
+    count resb 01
+
 
 section .text
     global _start
     _start:
 
-    disp hellomsg, hellomsglen
+    dispmenu: 
+    rw 1,1,menu,menulen
+    rw 0,0, choice, 2
 
-    menulooop:
-    disp menu, menulen
-    read opt,02
-
-    cmp opt, 31h
+    cmp choice, 31h
     jne checksub
     call addprocedure
     call htoa
-    jmp menulooop
+    jmp dispmenu
 
     checksub:
-    cmp opt, 32h
-    jne checkmul
+    cmp choice, 32h
+    jne checkexit
     call subprocedure
     call htoa
-    jmp menulooop
+    jmp dispmenu
 
-    checkmul:
-    cmp opt, 33h
-    jne checkdiv
-    call mulprocedure
-    call htoa
-    jmp menulooop
-
-    checkdiv:
-    cmp opt, 34h
-    jne checkexit
-    call divprocedure
-    jmp menulooop
-
-    checkexit
-    cmp opt, 35h
-    jne menulooop
+    checkexit:
+    cmp choice, 33h
+    jne dispmenus
     jmp exit
-
-    exit : 
-    mov rax, 60
-    mov rdi, 0
-    syscall
 
 
 
@@ -114,64 +82,41 @@ section .text
     mov qword[result], rax
     ret
 
-    mulprocedure:
-    mov rax, qword[num1]
-    mov ebx, dword[num2]
-    mul ebx
-    mov qword[result], rax
-    ret
-
-    divprocedure:
-    xor rax, rax
-    xor rdx, rdx
-    xor rbx, rbx
-    mov rax, qword[num1]
-    mov ebx, dword[num2]
-
-    div ebx
-
-    mov qword[quotient], rax
-    mov qword[remainder], rdx
-
-    disp quomsg, quolen
-    mov rax, qword[quotient]
-    mov qword[result],rax
-    call htoa
-
-    disp remmsg, remlen
-    mov rax, qword[remainder]
-    mov qword[result],rax
-    call htoa
-
-    ret
-
-
     htoa:
-    mov rbp, resultarr
     mov rax, qword[result]
-    mov byte[count], 16
+    move byte[count], 16
+    mov rbp, resultarr
 
     label1:
     rol rax, 04
     mov bl,al
-    and bl,0F
-    cmp bl, 09
-    jle label2
-    add bl, 07
+    and bl, 0FH
+    cmp bl, 09H
+    jle next1
+    add bl, 07H
 
-    label2:
-    add bl, 30
+    next1:
+    add bl, 30h
     mov [rbp], bl
     inc rbp
     dec byte[count]
+
     jnz label1
-    disp resultarr, 16
+
+    rw 1,1,resultarr,16
     ret
 
-    
 
 
 
-    
+
+
+
+
+
+
+
+
+
 
 

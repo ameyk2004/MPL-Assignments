@@ -32,7 +32,8 @@ section .bss
 
 section .text
     global _start
-_start: print msg,msglen
+_start:
+ print msg,msglen
 
 
 ;print array elements
