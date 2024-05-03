@@ -9,3 +9,14 @@
 9. mov rax to variable named max
 10. display max
 11. end
+
+Important part of code
+
+xor rax, rax
+b1: cmp al, [rbp]
+ja: cont_loop
+mov al, [rbp]
+
+    cont_loop: inc rbp
+               dec byte[count]
+
