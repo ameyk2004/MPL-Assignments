@@ -1,0 +1,269 @@
+MPL Question bank for ORAL
+Q1. What is assembler
+The Assembler is a system software that converts an assembly language code to machine code. It takes basic Computer commands and converts them into Binary Code that Computer’s Processor can use to perform its Basic Operations.
+These instructions are assembler language or assembly language.Assembly language uses opcode for the instructions.
+
+
+Q2. WhatisNASM
+The Netwide Assembler, NASM, is an 80x86 and x86-64 assembler designed for portability and modularity.
+- Open Source Software
+
+Role of assembler,loader & linker:
+1. Assembler: assembly code -> machine code
+contains the binary representation of our program.
+2. Linker: machine code is sorted and resolves memory refrences
+files to make an executable file.
+linker can combine more than one obj file
+3. Loader:It loads the final executable code into memory.
+
+Q3. What is 64-bit systemcall 
+request made by program to os or kernel for I/O operations, file handling
+- Put the system call number in the RAX register. (60)
+- Store the arguments to the system call in the - - - registers RBX, RCX, etc.
+- Call the relevant interrupt (80h)
+- The result is usually returned in the RAX register
+
+Q4. What are the 64-bit general-purpose registers?
+R8 to R15 --> extra general purpose registers
+
+
+Q5. What are the segment register 80386?
+In Protected mode,
+segments act like selectors and selects the descriptor which contains the address of section of code.
+Code segment is part of memory where instructions are stored
+
+Q6. What is size of segment register 80386
+16 bit
+
+Q7. Do you know any other assembler?
+MASM, TASM, GAS
+
+Q8. Explainanalgorithmofassignmentno...?
+
+
+Q9. Difference between .data & .bss section
+
+Q10.What is read and write 64-bit system call
+rax 0 -> syscall number
+rdi -> stdin/stdout (FILE DESCRIPTOR)
+rsi -> variable name i.e. source address (where we need to store or get from) 
+rdx -> length of data in bytes
+
+Q11. does read system call return anything?
+whatever we are reading length is stored in RAX
+zero indicates nothing is read
+if negative not read correctly 
+
+12.How to define an 8bit/16 bit/32 bit/64-bit hexadecimal number 
+
+
+
+
+
+13.How to declare an 8bit/16 bit/32 bit/64-bit hexadecimal number in which section
+
+
+
+
+Q14. BSS stands for? 
+(Ans: - Block Stack Symbol)
+
+
+Q15.How to represent a hexadecimal negative number
+-> 2's Complimnt method 
+-> sign bit method
+
+
+Q16.What is significance of RAX register in system calls (likewise for RDX, RSI,
+RDI)
+
+
+
+17.Define instructions, define directive
+instrctions -> to be exeuted 
+directive -> extra information
+An instruction is a task to be carried out by the processor at run time. Instructions are assembled into machine code and eventually linked into the final executable. A directive is an instruction to the assembler telling it how to treat the data it is asked to assemble
+
+18.What are the control transfer instructions?
+->jmp
+->call
+->ret / iret
+ret pops the instruction ptr to calling code
+iret pops the instruction ptr to calling code but changes the flags.
+
+
+19.What is the type of JUMP instruction
+
+20.Tell the difference between conditional Jump and un-conditional Jump 
+
+21.Difference between signed conditional and unsigned conditional JMP 
+
+22.Enlist signed conditional JMP
+jle
+jg
+jge
+jl
+
+23.Enlist unsigned conditional JMP
+ja
+jb
+jbe
+
+24.What is DB/DD/DW/DQ
+
+
+25.Difference between DB & RESB
+
+
+26. What is significance of ‘$’ in nasm
+    msglen equ $-msg
+    equ -> constant / equate directive
+    $ points to the location, next to the last location of the previously reserved mem.
+
+27. Explain Instructions used in your program? Explain any instructions
+(learn All instructions)
+
+28.Define addressing Modes
+
+29.What are the types of addressing modes
+
+30.Explain -------- addressing Mode with suitable example
+
+31. Identify addressing mode used in instruction
+
+32. What are the Directives used in your program? Explain any directives
+(learn All Directives)
+section -> 
+data -> 
+global extern (scope directive)
+
+
+33.11.What are the steps to execute ALP on NSAM 
+
+34.12. What is Global and Extern directives
+
+
+35.What are the string instructions and have it works? 
+DF (Direction flag): The direction flag controls the direction of string operations. When the D flag is cleared these operations process strings from low memory up to high memory. This means that offset pointers (usually SI and DI) are incremented by 1 after each operation in the string instructions when the D flag is cleared. If the D flag is set, then SI and DI are decremented by 1 after each operation to process strings from high to low memory
+
+36. What is the bit related instructions
+Types of Bit instructions
+rotate
+logical
+bit test
+
+
+37. Which flags get affected after ------- instruction
+
+
+38. What is procedure? How to define and call procedure
+
+
+39.What macro? How to define and call macro
+
+
+40.What is interrupt? Define interrupt
+41.How to handle interrupt
+Interrupt service routine 
+pc -> ISR 
+after iret prog continues
+
+
+42.What are the different ways to write add instructions (using different
+addressing modes)
+
+
+43.Differentiate between procedure and macro
+procedure -> compile time  , args cannot be given
+macro -> run time , args can be given
+looping not preferred in macro
+recursion not possible in macro
+
+
+44.Differentiate between procedure and interrupt
+
+
+
+
+
+45.How to call interrupt
+
+46.What do you mean by maskable interrupt
+If flag can be reset using cli 
+any interrupts on intr pin are ignored or masked 
+on nmi pin they cannot be masked, since 00 (highest priority)
+
+47.What are the types of procedure?
+far procedure
+near procedure
+recursive procedure
+
+48.Differentiate between Far and Near Procedure
+Near procedures use relative addressing for control transfer instructions, which means they can only jump within the same code segment.
+Near procedures are typically used when the code size is small and does not need to span multiple segments.
+The CALL and RET instructions are used to call and return from near procedures, respectively, without specifying a segment.
+Far Procedure:
+In a far procedure, the calling code and the called procedure may reside in different memory segments.
+Far procedures
+
+49.Can we use loop inside macro ?
+YES but not recommended
+
+
+50. How to iterate block of code in assembly
+loop instruction
+use jmp
+
+
+51. How to convert HEX to ASCII (byte /word)
+
+
+52. How to check Protection is enabled in processor
+PE bit of MSW is 1 
+
+53.What are the control registers?
+CR0 -> MSW (32 bit)
+CR1 -> Intel reserved
+CR2 -> page fault linear addr
+CR3 -> PDBR (20bits), 12 bit zeros 
+
+54.Define Machine Status Word (MSW)
+
+55.How to read value from MSW (specify instruction)
+SMSW
+
+56.What is size of MSW
+16 bit
+
+57.What is LDT, GDT, IDT
+
+
+58.What is LDTR, GDTR, IDTR
+59.What is size of LDTR, GDTR, IDTR
+60.How to read content of LDTR, GDTR, IDTR, TR, MSW
+12 bytes
+ebx:edx:ecx
+4,4,4
+
+CPUID
+mov dword[cpuid_contents], ebx
+mov dword[cpuid_contents+4], edx
+mov dword[cpuid_contents+8], ecx
+write cpuid_contents, 12
+
+
+61. What is task register? what is its size
+
+62.How to do multitasking
+
+63.What is Tsk State Segment (TSS)
+unique for each task
+T bit is a debug trap to raise a debug instruction
+
+64.Draw flag register, control register, descriptor format, architecture of
+80386
+65.What is recursion
+66.Where the command line gets stored (Ans: stack and in reverse order)
+
+./a 4
+
