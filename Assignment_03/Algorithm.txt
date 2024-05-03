@@ -1,0 +1,33 @@
+1. start
+2. Declare an array of 5 quadword numbers in data section
+3. set count to 5, pcount to 0, ncount to 0
+4. move number to rax
+5. check the msb (i.e 63rd bit) of rax
+6. if carry is set (number is -ve), else positive
+7. if negative increase ncount else, increase ncount
+8. continue steps 4 to 7 5 times
+9. convert pcont, ncount from hex to ascii hex
+10. end
+
+
+htoa:
+mov rb, resultarr
+move byte[count], 02
+mov ax, res
+
+label1:
+rol ax, 04
+and bl, 0FH
+cmp bl 09H
+jle skip1
+add bl, 07
+
+skip1:
+add bl, 30H
+mov resultarr, [rbp]
+inc rbp
+dec byte[count]
+jnz label1
+
+disp resultarr, 2
+ret
