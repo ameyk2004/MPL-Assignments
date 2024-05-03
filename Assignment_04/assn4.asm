@@ -1,79 +1,88 @@
-%macro disp 2
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, %1
-    mov rdx, %2
+ %macro print 2
+    mov rax,1
+    mov rdi,1
+    mov rsi,%1
+    mov rdx,%2
     syscall
 %endmacro
-
-%macro read 2
-    mov rax, 0
-    mov rdi, 0
-    mov rsi, %1
-    mov rdx, %2
+   
+       
+%macro exit 0
+    mov rax,60
+    mov rdi,0
     syscall
-%endmacro
+ %endmacro
 
 section .data
-    arr dq 123456789ABCDEF0h, 2233445566778899h, 1122334455667788h, 9988776655443322h, 8877665544332211h
-    count db 05
+    msg db "array Elements are:",0xa,0xd
+    msglen equ $-msg
 
-    largest dq 0000000000000000h
+    msg2 db "",0xa,0xd
+    msglen2 equ $-msg2
 
-    msg1 db "Largest Number is : "
-    msglen1 equ $-msg1
+    msg3 db "The largest number is:"
+    msglen3 equ $-msg3
+
+    array dq 000000000000000Ah,0000000000000007h,0000000000000003h,000000000000000Bh,0000000000000005h
 
 section .bss
-    resultarr resb 16
+
+    counter resb 1
+    max resb 20
 
 section .text
-global _start
-    _start:
-
-    mov rbp, arr
-    mov rax, [rbp]
-    mov qword[largest], rax
+    global _start
+_start: print msg,msglen
 
 
-    up:
-    mov rax, [rbp]
-    cmp qword[largest], rax
-    jp next1:
-    mov qword[largest], rax
-    next:
-    inc rbp
-    dec byte[count]
-    jnz up
+;print array elements
 
-    disp msg1, msg1len
-    call htoa
-
-    mov rax, 60
-    mov rdi, 0
-    syscall
-
-htoa:
-mov rax, qword[largest]
-mov byte[count], 16
-mov rbp, resultarr
-
-label1:
-rol rax, 04
-mov bl,al
-and bl, 0F
-cmp bl, 09
-jle label2
-add bl, 07
-
-label2:
-add bl, 30
-move [rbp], bl
+mov byte[counter],05h
+mov rbp,array
+back: mov al,[rbp]
+Call display
 inc rbp
-dec byte[count]
-jnz label1
+dec byte[counter]
+jnz back
 
-disp resultarr, 16
-ret
+;find largest number
+
+print msg3,msglen3
+mov byte[counter],05h
+mov rbp,array
+xor rax,rax
+b1: cmp al,[rbp]
+ja  go
+mov al,[rbp]
+  go:   inc rbp
+         dec byte[counter]
+         jnz b1
+
+        call display
+
+exit
 
 
 
+
+display:    mov rbx,rax
+       mov cx,16
+       mov rsi,max
+       
+    back2: Rol rbx,04H
+          mov al,bl
+          AND al,0FH
+          cmp al,09H
+          jle add_30
+          add al,07H
+     
+    add_30: add al,30H
+       
+    skip: mov byte[rsi],al
+         add rsi,01
+         dec cx
+         jnz back2
+
+print max,16
+print msg2,msglen2
+ret 
