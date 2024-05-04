@@ -183,9 +183,6 @@ recursion not possible in macro
 44.Differentiate between procedure and interrupt
 
 
-
-
-
 45.How to call interrupt
 
 46.What do you mean by maskable interrupt
@@ -265,5 +262,19 @@ T bit is a debug trap to raise a debug instruction
 65.What is recursion
 66.Where the command line gets stored (Ans: stack and in reverse order)
 
-./a 4
+
+atoh for 2 bytes
+1. start
+2. clear rax and rdx
+3. set rsi to variable read
+4. set counter
+5. rotate dl by 4 bits
+6. move contents of rsi to al
+7. cmp al, 39h 
+8. if al is lower in magnitude subtract 30
+9. else subtract 37h
+10. inc rsi
+11. decrement count
+12. continue steps 5 to 11 till count becomes zero
+
 
