@@ -95,7 +95,8 @@ hex_bcd:
     mov     rbx,10
 back:
     xor     rdx,rdx
-    div     rbx;rax contains quotient and rdx the remainder
+    div     rbx;
+    rax contains quotient and rdx the remainder
 
     push    dx
     inc     byte[digitcount]

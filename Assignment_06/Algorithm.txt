@@ -1,0 +1,17 @@
+1. start
+2. display menu
+3. read user choice
+4. if selected option = option 1
+4.1 read user's Hex number to convert it from ascii hex to hex
+4.2 Divide num by 0Ah
+4.3 push remainder in stack, (quotient gets stored in rax)
+4.4 repeat steps 4.2 and 4.3 till quotient is 0 
+4.5 pop from stack an display the num and add 30 to convert hext to ascii hex
+5. if user selects option of bcd to hex
+5.1 read input 5 digit bcd number
+5.2 hex digit = previous digit * 10 + next digit
+5.3 convert num to scii hex by adding 30 
+5.4 display num
+6. stop
+
+
