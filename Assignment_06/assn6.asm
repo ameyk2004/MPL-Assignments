@@ -92,7 +92,7 @@ hex_bcd:
     call    accept_16
     mov     ax,bx
 
-    mov     rbx,10
+    mov     rbx,10h
 back:
     xor     rdx,rdx
     div     rbx;

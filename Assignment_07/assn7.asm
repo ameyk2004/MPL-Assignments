@@ -72,9 +72,9 @@ protec:
 
 skip:
 	
-		sgdt [gdtrsave]
-		sldt [ldtrsave]
-		sidt [idtrsave]
+		sgdt [gdtrsave] ; 6byted
+		sldt [ldtrsave] ; 2 bytes
+		sidt [idtrsave] ; 6byted
 		str	 [trsave]
 		smsw [mswsave]
 		
