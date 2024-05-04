@@ -75,8 +75,8 @@ skip:
 		sgdt [gdtrsave] ; 6byted
 		sldt [ldtrsave] ; 2 bytes
 		sidt [idtrsave] ; 6byted
-		str	 [trsave]
-		smsw [mswsave]
+		str	 [trsave] ; 2 bytes
+		smsw [mswsave] ; 2 bytes of msw in mswsave
 		
 		;=========================== display gdtr contents ================================
 		rw 01,gdtrmsg,gdtrmsglen

@@ -1,0 +1,15 @@
+1. start
+2. define source array and destination array
+3. display menu
+4. read choice
+5. if choice is 1 ("Overlapping USING MOVSQ")
+6. mov rsi to source array
+7. mov rdi to destination array
+8. print initial location and value at each index
+9. move rsi to to last location (sarr+32)
+10. move rdi to to last location (darr+16)
+11. set direction flag using std instruction
+12. repeat using movsq 
+(This will automatically copy source contents to destination contents by recrementing rsi, rdi)
+13.print address after reallocation
+
